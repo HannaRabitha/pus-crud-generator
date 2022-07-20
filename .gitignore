@@ -1,0 +1,5 @@
+
+*.tgz
+node_modules
+angular-crud/.DS_Store
+.DS_Store
