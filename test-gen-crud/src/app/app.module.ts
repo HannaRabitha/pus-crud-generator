@@ -1,4 +1,4 @@
-import { FlightModule } from './flight/flight.module';
+// import { FlightModule } from './flight/flight.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NgModule } from '@angular/core';
@@ -10,17 +10,14 @@ import { APP_EXTRA_OPTIONS, APP_ROUTES } from './app.routes';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { TestcrudModule } from './testcrud/testcrud.module';
-import { Hotel2Module } from './hotel2/hotel2.module';
+import { CobacobaModule } from './cobacoba/cobacoba.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightModule,
-    RouterModule.forRoot([...APP_ROUTES], {...APP_EXTRA_OPTIONS}),
-    TestcrudModule,
-    Hotel2Module,
+    RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),
+    CobacobaModule,
   ],
   declarations: [
     AppComponent,
@@ -29,7 +26,6 @@ import { Hotel2Module } from './hotel2/hotel2.module';
     HomeComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

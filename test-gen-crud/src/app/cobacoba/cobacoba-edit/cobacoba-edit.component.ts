@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CobaLagiService } from '../coba-lagi.service';
-import { CobaLagi } from '../coba-lagi';
+import { CobacobaService } from '../cobacoba.service';
+import { Cobacoba } from '../cobacoba';
 import { map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-coba-lagi-edit',
-  templateUrl: './coba-lagi-edit.component.html'
+  selector: 'app-cobacoba-edit',
+  templateUrl: './cobacoba-edit.component.html'
 })
-export class CobaLagiEditComponent implements OnInit {
+export class CobacobaEditComponent implements OnInit {
 
   id!: string;
-  cobaLagi!: CobaLagi;
+  cobacoba!: Cobacoba;
   feedback: any = {};
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private cobaLagiService: CobaLagiService) {
+    private cobacobaService: CobacobaService) {
   }
 
   ngOnInit() {
@@ -28,13 +28,13 @@ export class CobaLagiEditComponent implements OnInit {
       .pipe(
         map(p => p['id']),
         switchMap(id => {
-          if (id === 'new') { return of(new CobaLagi()); }
-          return this.cobaLagiService.findById(id);
+          if (id === 'new') { return of(new Cobacoba()); }
+          return this.cobacobaService.findById(id);
         })
       )
       .subscribe({
-        next: cobaLagi => {
-          this.cobaLagi = cobaLagi;
+        next: cobacoba => {
+          this.cobacoba = cobacoba;
           this.feedback = {};
         },
         error: err => {
@@ -44,12 +44,12 @@ export class CobaLagiEditComponent implements OnInit {
   }
 
   save() {
-    this.cobaLagiService.save(this.cobaLagi).subscribe({
-      next: cobaLagi => {
-        this.cobaLagi = cobaLagi;
+    this.cobacobaService.save(this.cobacoba).subscribe({
+      next: cobacoba => {
+        this.cobacoba = cobacoba;
         this.feedback = {type: 'success', message: 'Save was successful!'};
         setTimeout(async () => {
-          await this.router.navigate(['/cobaLagis']);
+          await this.router.navigate(['/cobacobas']);
         }, 1000);
       },
       error: err => {
@@ -59,6 +59,6 @@ export class CobaLagiEditComponent implements OnInit {
   }
 
   async cancel() {
-    await this.router.navigate(['/cobaLagis']);
+    await this.router.navigate(['/cobacobas']);
   }
 }

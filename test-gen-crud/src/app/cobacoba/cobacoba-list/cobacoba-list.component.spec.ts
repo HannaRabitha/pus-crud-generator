@@ -2,24 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { CobaLagiListComponent } from './coba-lagi-list.component';
-import { CobaLagiService } from '../coba-lagi.service';
+import { CobacobaListComponent } from './cobacoba-list.component';
+import { CobacobaService } from '../cobacoba.service';
 
-describe('CobaLagiListComponent', () => {
-  let component: CobaLagiListComponent;
-  let fixture: ComponentFixture<CobaLagiListComponent>;
+describe('CobacobaListComponent', () => {
+  let component: CobacobaListComponent;
+  let fixture: ComponentFixture<CobacobaListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CobaLagiListComponent],
+      declarations: [CobacobaListComponent],
       imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
-      providers: [CobaLagiService]
+      providers: [CobacobaService]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CobaLagiListComponent);
+    fixture = TestBed.createComponent(CobacobaListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

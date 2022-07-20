@@ -1,8 +1,8 @@
 {
-  "title": "testcrud",
-  "entity": "testcrud",
+  "title": "Cobacoba",
+  "entity": "cobacoba",
   "api": {
-    "url": "http://www.angular.at/api/testcrud"
+    "url": "http://www.angular.at/api/hotel"
   },
   "filter": ["city"],
   "fields": [

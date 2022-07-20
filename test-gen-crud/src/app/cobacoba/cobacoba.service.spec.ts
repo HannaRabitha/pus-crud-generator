@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
-import { CobaLagiService } from './coba-lagi.service';
+import { CobacobaService } from './cobacoba.service';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
-describe('CobaLagiService', () => {
-  let service: CobaLagiService;
+describe('CobacobaService', () => {
+  let service: CobacobaService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [CobaLagiService]
+      providers: [CobacobaService]
     });
 
-    service = TestBed.get(CobaLagiService);
+    service = TestBed.get(CobacobaService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
