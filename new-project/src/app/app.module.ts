@@ -1,20 +1,23 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { RouterModule } from "@angular/router";
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { HotelModule } from './hotel/hotel.module';
+import { HttpClientModule } from "@angular/common/http";
+
+import { AppComponent } from "./app.component";
+import { HotelModule } from "./hotel/hotel.module";
+
+import { APP_EXTRA_OPTIONS, APP_ROUTES } from "./app.routes";
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    HotelModule
+    HotelModule,
+    HttpClientModule,
+    RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
