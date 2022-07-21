@@ -3,7 +3,7 @@ import { ExtraOptions, PreloadAllModules, Routes } from "@angular/router";
 export const APP_ROUTES: Routes = [
   {
     path: "",
-    redirectTo: "",
+    redirectTo: "hotels",
     pathMatch: "full",
   },
   // {
