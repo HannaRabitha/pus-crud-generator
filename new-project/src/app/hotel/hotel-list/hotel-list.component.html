@@ -1,50 +1,97 @@
-<ol class="breadcrumb float-right">
-  <li class="breadcrumb-item"><a routerLink="/">Home</a></li>
-  <li class="breadcrumb-item active">Hotel</li>
-</ol>
-<div class="card">
-  <div class="header">
-    <h2 class="title">Hotel List</h2>
+<!-- CUSTOM -->
+<!-- component -->
+<!-- This is an example component -->
+<div class="container mx-auto my-4">
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+    <!-- Form Search Input -->
+    <div class="bg-[#DCEFFF] p-4">
+      <form #f="ngForm" class="flex gap-4">
+        <label for="city" class="sr-only">Search</label>
+        <div class="relative mt-1">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <input type="text" [(ngModel)]="filter.city" id="city" name="city"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
+            placeholder="Search for items">
+        </div>
+        <button (click)="search()" [disabled]="!f?.valid"
+          class="bg-[#005FAC] hover:bg-[#004F8F] focus:bg-[#005FAC] focus:outline-none focus:ring focus:ring-[#99BFDE] text-white font-bold py-2 px-6 rounded-full">
+          Search
+        </button>
+        <button [routerLink]="['../hotels', 'new' ]"
+          class="bg-[#FFBA14] hover:bg-[#FCC742] focus:bg-[#FFBA14] focus:outline-none focus:ring focus:ring-[#D29604] text-[#755302] font-bold py-2 px-10 rounded-full">
+          New
+        </button>
+      </form>
+    </div>
+
+    <!-- List Data -->
+    <div *ngIf="hotelList.length > 0">
+      <div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+
+
+      <table class="w-full text-sm text-left text-gray-700" id="datatable">
+        <thead class="text-lg text-gray-700 uppercase bg-gray-50">
+          <tr>
+            <th scope="col" class="px-6 py-3">
+              Id
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Name
+            </th>
+            <th scope="col" class="px-6 py-3">
+              City
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Stars
+            </th>
+            <th scope="col" class="px-6 py-3">
+              Aksi
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of hotelList" [class.active]="item === selectedHotel"
+            class="bg-white border-b  hover:bg-gray-50 ">
+
+            <td class="px-6 py-4">
+              {{item.id}}
+            </td>
+            <td class="px-6 py-4">
+              {{item.name}}
+            </td>
+            <td class="px-6 py-4">
+              {{item.city}}
+            </td>
+            <td class="px-6 py-4">
+              {{item.stars}}
+            </td>
+            <td class="py-4 gap-6">
+              <button class="mx-4">
+                <a [routerLink]="['../hotels', item.id ]" class="font-medium text-blue-600  hover:underline">Edit</a>
+
+              </button>
+              <button (click)="delete(item)" class="mx-4 text-red-500">Delete</button>
+
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+
   </div>
-  <div class="content">
-    <form #f="ngForm">
-      
-      <div class="form-group">
-        <label for="city">City:</label>
-        <input [(ngModel)]="filter.city" id="city" name="city" class="form-control">
-      </div>
-      
-      <button (click)="search()" [disabled]="!f?.valid" class="btn btn-primary">Search</button>
-      <a [routerLink]="['../hotels', 'new' ]" class="btn btn-default">New</a>
-    </form>
-  </div>
-</div>
-<div class="card" *ngIf="hotelList.length > 0">
-  <div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
-  <div class="table-responsive">
-    <table class="table table-centered table-hover mb-0" id="datatable">
-      <thead>
-        <tr>
-          <th class="border-top-0" scope="col">Id</th>
-          <th class="border-top-0" scope="col">Name</th>
-          <th class="border-top-0" scope="col">City</th>
-          <th class="border-top-0" scope="col">Stars</th>
-          <th class="border-top-0" scope="col" style="width:120px"></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let item of hotelList" [class.active]="item === selectedHotel">
-        
-          <td>{{item.id}}</td>
-          <td>{{item.name}}</td>
-          <td>{{item.city}}</td>
-          <td>{{item.stars}}</td>
-          <td style="white-space: nowrap">
-            <a [routerLink]="['../hotels', item.id ]" class="btn btn-secondary">Edit</a>&nbsp;
-            <button (click)="delete(item)" class="btn btn-danger">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+
+
 </div>

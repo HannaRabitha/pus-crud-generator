@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { HotelFilter } from '../hotel-filter';
-import { HotelService } from '../hotel.service';
-import { Hotel } from '../hotel';
+import { Component, OnInit } from "@angular/core";
+import { HotelFilter } from "../hotel-filter";
+import { HotelService } from "../hotel.service";
+import { Hotel } from "../hotel";
 
 @Component({
-  selector: 'app-hotel',
-  templateUrl: 'hotel-list.component.html'
+  selector: "app-hotel",
+  templateUrl: "hotel-list.component.html",
 })
 export class HotelListComponent implements OnInit {
-
   filter = new HotelFilter();
   selectedHotel!: Hotel;
   feedback: any = {};
@@ -17,8 +16,7 @@ export class HotelListComponent implements OnInit {
     return this.hotelService.hotelList;
   }
 
-  constructor(private hotelService: HotelService) {
-  }
+  constructor(private hotelService: HotelService) {}
 
   ngOnInit() {
     this.search();
@@ -33,17 +31,20 @@ export class HotelListComponent implements OnInit {
   }
 
   delete(hotel: Hotel): void {
-    if (confirm('Are you sure?')) {
+    if (confirm("Are you sure?")) {
       this.hotelService.delete(hotel).subscribe({
         next: () => {
-          this.feedback = {type: 'success', message: 'Delete was successful!'};
+          this.feedback = {
+            type: "success",
+            message: "Delete was successful!",
+          };
           setTimeout(() => {
             this.search();
           }, 1000);
         },
-        error: err => {
-          this.feedback = {type: 'warning', message: 'Error deleting.'};
-        }
+        error: (err) => {
+          this.feedback = { type: "warning", message: "Error deleting." };
+        },
       });
     }
   }
