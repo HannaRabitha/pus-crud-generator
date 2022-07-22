@@ -1,0 +1,89 @@
+<div class="container mx-auto my-4">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+
+    <div class="bg-[#DCEFFF] p-4">
+      <!-- Search Content -->
+      <div>
+        <form #f="ngForm" class="flex gap-4">
+          <% for (let field of getFilterFields(model)) { %>
+            <label for="<%=field.name%>" class="sr-only">
+              <%=field.label%>
+            </label>
+            <div class="relative mt-1">
+              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd"
+                    d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </div>
+              <input [(ngModel)]="filter.<%=field.name%>" id="<%=field.name%>" name="<%=field.name%>"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
+                placeholder="Search for items">
+            </div>
+            <% } %>
+              <!-- button -->
+              <button (click)="search()" [disabled]="!f?.valid"
+                class="bg-[#005FAC] hover:bg-[#004F8F] focus:bg-[#005FAC] focus:outline-none focus:ring focus:ring-[#99BFDE] text-white font-bold py-2 px-6 rounded-full">Search</button>
+              <button [routerLink]="['../<%=pluralize(name)%>', 'new' ]"
+                class="bg-[#FFBA14] hover:bg-[#FCC742] focus:bg-[#FFBA14] focus:outline-none focus:ring focus:ring-[#D29604] text-[#755302] font-bold py-2 px-10 rounded-full">New</button>
+        </form>
+      </div>
+      <!-- End Search Content -->
+    </div>
+
+
+    <!-- List Data -->
+    <div *ngIf="<%=camelize(name)%>List.length > 0">
+      <div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
+      <% let id=getId(model); %>
+        <table class="w-full text-sm text-left text-gray-700" id="datatable">
+          <thead class="text-lg text-gray-700 uppercase bg-gray-50">
+            <tr>
+              <% for (let field of model.fields) { %>
+                <th scope="col" class="px-6 py-3">
+                  <%=field.label%>
+                </th>
+                <% } %>
+                  <th scope="col" class="px-6 py-3">
+                    Aksi
+                  </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of <%=camelize(name)%>List" [class.active]="item === selected<%=classify(name)%>"
+              class="bg-white border-b  hover:bg-gray-50 ">
+              <% for (let field of model.fields) { %>
+                <td class="px-6 py-4">{{item.<%=field.name%>
+                    <%=(field.control==='date' )? ' | date' : '' %>}}</td>
+                <% } %>
+                  <td class="py-4 gap-6">
+                    <!-- Edit Button -->
+                    <button [routerLink]="['../<%=pluralize(name)%>', item.<%=id.name%> ]" class="mx-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#005FAC] hover:text-[#004F8F]"
+                        fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path
+                          d="M11 5H4.77778C4.30628 5 3.8541 5.1873 3.5207 5.5207C3.1873 5.8541 3 6.30628 3 6.77778V19.2222C3 19.6937 3.1873 20.1459 3.5207 20.4793C3.8541 20.8127 4.30628 21 4.77778 21H17.2222C17.6937 21 18.1459 20.8127 18.4793 20.4793C18.8127 20.1459 19 19.6937 19 19.2222V13" />
+                        <path
+                          d="M17.9227 3.52798C18.2607 3.18992 18.7193 3 19.1973 3C19.6754 3 20.134 3.18992 20.472 3.52798C20.8101 3.86605 21 4.32456 21 4.80265C21 5.28075 20.8101 5.73926 20.472 6.07732L12.3991 14.1502L9 15L9.84978 11.6009L17.9227 3.52798Z" />
+                      </svg>
+                    </button>
+
+                    <!-- Delete Button -->
+                    <button (click)="delete(item)" class="mx-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-500 hover:fill-red-800"
+                        fill="none" viewBox="0 0 24 24" stroke-width="0.2" stroke="currentColor">
+                        <path
+                          d="M5 20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V8H21V6H17V4C17 3.46957 16.7893 2.96086 16.4142 2.58579C16.0391 2.21071 15.5304 2 15 2H9C8.46957 2 7.96086 2.21071 7.58579 2.58579C7.21071 2.96086 7 3.46957 7 4V6H3V8H5V20ZM9 4H15V6H9V4ZM8 8H17V20H7V8H8Z" />
+                        <path d="M9 10H11V18H9V10ZM13 10H15V18H13V10Z" />
+                      </svg>
+                    </button>
+                  </td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <!-- End List Data -->
+  </div>
+</div>
