@@ -3,35 +3,39 @@
 <!-- This is an example component -->
 <div class="container mx-auto my-4">
 
-  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <h1 class="text-2xl font-bold my-4">Judul Tabel</h1>
 
-    <!-- Form Search Input -->
-    <div class="bg-[#DCEFFF] p-4">
-      <form #f="ngForm" class="flex gap-4">
-        <label for="city" class="sr-only">Search</label>
-        <div class="relative mt-1">
-          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </div>
-          <input type="text" [(ngModel)]="filter.city" id="city" name="city"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
-            placeholder="Search for items">
+
+  <!-- Form Search Input -->
+  <div class="my-4 flex justify-between">
+    <form #f="ngForm">
+      <!-- <label for="city" class="sr-only">Search</label> -->
+      <div class="relative mt-1">
+        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+          <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd"
+              d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+              clip-rule="evenodd"></path>
+          </svg>
         </div>
-        <button (click)="search()" [disabled]="!f?.valid"
-          class="bg-[#005FAC] hover:bg-[#004F8F] focus:bg-[#005FAC] focus:outline-none focus:ring focus:ring-[#99BFDE] text-white font-bold py-2 px-6 rounded-full">
-          Search
-        </button>
-        <button [routerLink]="['../hotels', 'new' ]"
-          class="bg-[#FFBA14] hover:bg-[#FCC742] focus:bg-[#FFBA14] focus:outline-none focus:ring focus:ring-[#D29604] text-[#755302] font-bold py-2 px-10 rounded-full">
-          New
-        </button>
-      </form>
-    </div>
+        <input type="text" [(ngModel)]="filter.city" id="city" name="city" (keydown.enter)="search()"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
+          placeholder="Search">
+      </div>
+    </form>
+    <button [routerLink]="['../hotels', 'new' ]"
+      class="bg-[#005FAC] hover:bg-[#004F8F] focus:bg-[#005FAC] focus:outline-none focus:ring focus:ring-[#99BFDE] text-white font-bold py-1 px-6 rounded-full">
+      <div class="flex">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10.0002 16.6667V9.99999M10.0002 9.99999V3.33333M10.0002 9.99999H16.6668M10.0002 9.99999H3.3335"
+            stroke="white" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        &nbsp; Tambah Data
+      </div>
+    </button>
+  </div>
+
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
     <!-- List Data -->
     <div *ngIf="hotelList.length > 0">
@@ -39,7 +43,7 @@
 
 
       <table class="w-full text-sm text-left text-gray-700" id="datatable">
-        <thead class="text-lg text-gray-700 uppercase bg-gray-50">
+        <thead class="text-lg text-gray-600 uppercase bg-[#F5F8FA]">
           <tr>
             <th scope="col" class="px-6 py-3">
               Id
@@ -60,7 +64,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let item of hotelList" [class.active]="item === selectedHotel"
-            class="bg-white border-b  hover:bg-gray-50 ">
+            class="bg-white border-b text-sm hover:bg-[#F7FBFE] ">
 
             <td class="px-6 py-4">
               {{item.id}}
@@ -88,7 +92,7 @@
 
               <button (click)="delete(item)" class="mx-4 ">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-red-500 hover:fill-red-800" fill="none"
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-[#005FAC] hover:fill-[#004F8F]" fill="none"
                   viewBox="0 0 24 24" stroke-width="0.2" stroke="currentColor">
                   <path
                     d="M5 20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V8H21V6H17V4C17 3.46957 16.7893 2.96086 16.4142 2.58579C16.0391 2.21071 15.5304 2 15 2H9C8.46957 2 7.96086 2.21071 7.58579 2.58579C7.21071 2.96086 7 3.46957 7 4V6H3V8H5V20ZM9 4H15V6H9V4ZM8 8H17V20H7V8H8Z" />
