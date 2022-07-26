@@ -5,10 +5,15 @@ import { HotelEditComponent } from './hotel-edit/hotel-edit.component';
 export const HOTEL_ROUTES: Routes = [
   {
     path: 'hotels',
-    component: HotelListComponent
+    component: HotelListComponent,
   },
   {
-    path: 'hotels/:id',
-    component: HotelEditComponent
+    path: '',
+    children: [
+      {
+        path: 'hotels/:id',
+        component: HotelEditComponent
+      }
+    ]
   }
 ];

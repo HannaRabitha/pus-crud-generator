@@ -779,10 +779,6 @@ video {
   fill: #ef4444;
 }
 
-.fill-blue-500 {
-  fill: #3b82f6;
-}
-
 .fill-\[\#005FAC\] {
   fill: #005FAC;
 }
@@ -965,11 +961,6 @@ video {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity));
-}
-
-.hover\:bg-\[\#F5F8FA\]:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(245 248 250 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-\[\#F7FBFE\]:hover {
