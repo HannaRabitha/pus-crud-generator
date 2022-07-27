@@ -11,6 +11,9 @@ export class HotelListComponent implements OnInit {
   filter = new HotelFilter();
   selectedHotel!: Hotel;
   feedback: any = {};
+  cp: number = 1;
+  key: string = 'id';
+  reverse: boolean = false;
 
   get hotelList(): Hotel[] {
     return this.hotelService.hotelList;
@@ -47,5 +50,13 @@ export class HotelListComponent implements OnInit {
         },
       });
     }
+  }
+
+  
+
+  sort(key:string) {
+    this.key = key;
+    this.reverse = !this.reverse;
+
   }
 }

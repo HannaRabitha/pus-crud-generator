@@ -30,7 +30,9 @@
           <path d="M10.0002 16.6667V9.99999M10.0002 9.99999V3.33333M10.0002 9.99999H16.6668M10.0002 9.99999H3.3335"
             stroke="white" stroke-width="2" stroke-linecap="round" />
         </svg>
+        <span class="md:flex hidden">
         &nbsp; Tambah Data
+        </span>
       </div>
     </button>
   </div>
@@ -44,12 +46,24 @@
 
       <table class="w-full text-sm text-left text-gray-700" id="datatable">
         <thead class="text-lg text-gray-600 uppercase bg-[#F5F8FA]">
-          <tr>
-            <th scope="col" class="px-6 py-3">
-              Id
+          <!-- <tr>
+            <th scope="col" class="px-6 py-3 flex items-center" (click)="sort('id')">
+              <span> Id &nbsp; </span>
+              <button class="hover:text-[#005FAC] text-[#636667] bg-black">
+                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1469 5.2993C12.5643 4.90023 13.1574 4.90023 13.5748 5.2993L16.4319 8.03097C16.8109 8.39333 16.957 9.00226 16.7963 9.54961C16.6357 10.097 16.2033 10.4633 15.7179 10.4633L10.0037 10.4633C9.51839 10.4633 9.08598 10.097 8.92533 9.54961C8.76467 9.00226 8.91082 8.39333 9.28982 8.03097L12.1469 5.2993Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.92533 14.4508C9.08598 13.9035 9.51839 13.5371 10.0037 13.5371H15.7179C16.2033 13.5371 16.6357 13.9035 16.7963 14.4508C16.957 14.9982 16.8109 15.6071 16.4319 15.9695L13.5748 18.7012C13.1574 19.1002 12.5643 19.1002 12.1469 18.7012L9.28982 15.9695C8.91082 15.6071 8.76467 14.9982 8.92533 14.4508Z" fill="currentColor"/>
+                  </svg>
+                </button>
             </th>
             <th scope="col" class="px-6 py-3">
-              Name
+              Name &nbsp; 
+              <button class="hover:text-[#005FAC] text-[#636667]">
+                <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1469 5.2993C12.5643 4.90023 13.1574 4.90023 13.5748 5.2993L16.4319 8.03097C16.8109 8.39333 16.957 9.00226 16.7963 9.54961C16.6357 10.097 16.2033 10.4633 15.7179 10.4633L10.0037 10.4633C9.51839 10.4633 9.08598 10.097 8.92533 9.54961C8.76467 9.00226 8.91082 8.39333 9.28982 8.03097L12.1469 5.2993Z" fill="currentColor"/>
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.92533 14.4508C9.08598 13.9035 9.51839 13.5371 10.0037 13.5371H15.7179C16.2033 13.5371 16.6357 13.9035 16.7963 14.4508C16.957 14.9982 16.8109 15.6071 16.4319 15.9695L13.5748 18.7012C13.1574 19.1002 12.5643 19.1002 12.1469 18.7012L9.28982 15.9695C8.91082 15.6071 8.76467 14.9982 8.92533 14.4508Z" fill="currentColor"/>
+                  </svg>
+                </button>
             </th>
             <th scope="col" class="px-6 py-3">
               City
@@ -57,13 +71,42 @@
             <th scope="col" class="px-6 py-3">
               Stars
             </th>
-            <th scope="col" class="px-6 py-3">
+            <th scope="col" class="text-center px-6 py-3">
               Aksi
             </th>
-          </tr>
+          </tr> -->
+          <tr>
+            <th scope="col" class="py-3 px-6">
+              <div class="flex items-center">
+                  Id
+                  <button (click)="sort('id')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+              </div>
+          </th>
+            <th scope="col" class="py-3 px-6">
+                <div class="flex items-center">
+                    Name
+                    <button (click)="sort('name')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                </div>
+            </th>
+            <th scope="col" class="py-3 px-6">
+                <div class="flex items-center">
+                    City
+                    <button (click)="sort('city')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                </div>
+            </th>
+            <th scope="col" class="py-3 px-6">
+                <div class="flex items-center">
+                    Starts
+                    <button (click)="sort('starts')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                </div>
+            </th>
+            <th scope="col" class="text-center px-6 py-3">
+              Aksi
+            </th>
+        </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of hotelList" [class.active]="item === selectedHotel"
+          <tr *ngFor="let item of hotelList | orderBy: key: reverse | paginate: { itemsPerPage: 8, currentPage: cp }" [class.active]="item === selectedHotel"
             class="bg-white border-b text-sm hover:bg-[#F7FBFE] ">
 
             <td class="px-6 py-4">
@@ -79,8 +122,9 @@
               {{item.stars}}
             </td>
 
-            <td class="py-4 gap-6">
-              <button [routerLink]="['../hotels', item.id ]" class="mx-4">
+            <td class="py-4 gap-2 flex justify-center">
+              
+              <button [routerLink]="['../hotels', item.id ]" class="mx-1">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#005FAC] hover:text-[#004F8F]" fill="none"
                   viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                   <path
@@ -90,7 +134,7 @@
                 </svg>
               </button>
 
-              <button (click)="delete(item)" class="mx-4 ">
+              <button (click)="delete(item)" class="mx-1">
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-[#005FAC] hover:fill-[#004F8F]" fill="none"
                   viewBox="0 0 24 24" stroke-width="0.2" stroke="currentColor">
@@ -105,14 +149,23 @@
             </td>
           </tr>
 
+          
+        
         </tbody>
       </table>
+      <div class="w-full py-4 flex items-center justify-end">
+        <pagination-controls (pageChange)="cp = $event"></pagination-controls>
+      </div>
+
     </div>
 
 
 
 
+
   </div>
+
+
 
 
 </div>
