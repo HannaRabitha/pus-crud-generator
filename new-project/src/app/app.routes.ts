@@ -2,9 +2,9 @@ import { ExtraOptions, PreloadAllModules, Routes } from "@angular/router";
 
 export const APP_ROUTES: Routes = [
   {
-    path: "",
-    redirectTo: "hotels",
-    pathMatch: "full",
+    path: '',
+    redirectTo: 'ceks',
+    pathMatch: 'full'
   },
   // {
   //   path: "hotels",

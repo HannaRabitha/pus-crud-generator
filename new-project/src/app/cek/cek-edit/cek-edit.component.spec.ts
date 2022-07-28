@@ -2,24 +2,24 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { DummyListComponent } from './dummy-list.component';
-import { DummyService } from '../dummy.service';
+import { CekEditComponent } from './cek-edit.component';
+import { CekService } from '../cek.service';
 
-describe('DummyListComponent', () => {
-  let component: DummyListComponent;
-  let fixture: ComponentFixture<DummyListComponent>;
+describe('CekEditComponent', () => {
+  let component: CekEditComponent;
+  let fixture: ComponentFixture<CekEditComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DummyListComponent],
+      declarations: [CekEditComponent],
       imports: [FormsModule, HttpClientTestingModule, RouterTestingModule],
-      providers: [DummyService]
+      providers: [CekService]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DummyListComponent);
+    fixture = TestBed.createComponent(CekEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

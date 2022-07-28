@@ -1,6 +1,6 @@
 {
-  "title": "Dummy",
-  "entity": "dummy",
+  "title": "Cek",
+  "entity": "cek",
   "api": {
     "url": "http://www.angular.at/api/hotel"
   },

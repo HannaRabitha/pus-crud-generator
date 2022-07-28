@@ -1,24 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DummyService } from '../dummy.service';
-import { Dummy } from '../dummy';
+import { CekService } from '../cek.service';
+import { Cek } from '../cek';
 import { map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-dummy-edit',
-  templateUrl: './dummy-edit.component.html'
+  selector: 'app-cek-edit',
+  templateUrl: './cek-edit.component.html'
 })
-export class DummyEditComponent implements OnInit {
+export class CekEditComponent implements OnInit {
 
   id!: string;
-  dummy!: Dummy;
+  cek!: Cek;
   feedback: any = {};
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private dummyService: DummyService) {
+    private cekService: CekService) {
   }
 
   ngOnInit() {
@@ -28,13 +28,13 @@ export class DummyEditComponent implements OnInit {
       .pipe(
         map(p => p['id']),
         switchMap(id => {
-          if (id === 'new') { return of(new Dummy()); }
-          return this.dummyService.findById(id);
+          if (id === 'new') { return of(new Cek()); }
+          return this.cekService.findById(id);
         })
       )
       .subscribe({
-        next: dummy => {
-          this.dummy = dummy;
+        next: cek => {
+          this.cek = cek;
           this.feedback = {};
         },
         error: err => {
@@ -44,12 +44,12 @@ export class DummyEditComponent implements OnInit {
   }
 
   save() {
-    this.dummyService.save(this.dummy).subscribe({
-      next: dummy => {
-        this.dummy = dummy;
+    this.cekService.save(this.cek).subscribe({
+      next: cek => {
+        this.cek = cek;
         this.feedback = {type: 'success', message: 'Save was successful!'};
         setTimeout(async () => {
-          await this.router.navigate(['/dummies']);
+          await this.router.navigate(['/ceks']);
         }, 1000);
       },
       error: err => {
@@ -59,6 +59,6 @@ export class DummyEditComponent implements OnInit {
   }
 
   async cancel() {
-    await this.router.navigate(['/dummies']);
+    await this.router.navigate(['/ceks']);
   }
 }

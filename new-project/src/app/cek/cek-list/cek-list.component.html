@@ -1,13 +1,13 @@
 <div class="container mx-auto my-4">
 
   <!-- Table Title -->
-  <h1 class="text-2xl font-bold my-4"><%=model.title%> List</h1>
+  <h1 class="text-2xl font-bold my-4">Cek List</h1>
 
 
   <!-- Form Search Input -->
   <div class="my-4 flex justify-between">
         <form #f="ngForm">
-          <% for (let field of getFilterFields(model)) { %>
+          
             <div class="relative mt-1">
               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                 <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -16,14 +16,14 @@
                     clip-rule="evenodd"></path>
                 </svg>
               </div>
-              <input [(ngModel)]="filter.<%=field.name%>" id="<%=field.name%>" name="<%=field.name%>" (keydown.enter)="search()"
+              <input [(ngModel)]="filter.city" id="city" name="city" (keydown.enter)="search()"
               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
-                placeholder="Search by <%=field.label%>">
+                placeholder="Search by City">
             </div>
-            <% } %>
+            
         </form>
          <!-- button add data -->
-       <button [routerLink]="['../<%=pluralize(name)%>', 'new' ]"
+       <button [routerLink]="['../ceks', 'new' ]"
         class="bg-[#005FAC] hover:bg-[#004F8F] focus:bg-[#005FAC] focus:outline-none focus:ring focus:ring-[#99BFDE] text-white font-bold py-1 px-6 rounded-full">
         <div class="flex">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,37 +41,67 @@
 
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <!-- List Data -->
-    <div *ngIf="<%=camelize(name)%>List.length > 0">
+    <div *ngIf="cekList.length > 0">
       <div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div>
-      <% let id=getId(model); %>
+      
         <table class="w-full text-sm text-left text-gray-700" id="datatable">
           <thead class="text-lg text-gray-600 uppercase bg-[#F5F8FA]">
             <tr>
-              <% for (let field of model.fields) { %>
+              
                 <th scope="col" class="py-3 px-6">
                   <div class="flex items-center">
-                  <%=field.label%>
-                  <button (click)="sort('<%=field.name%>')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                  Id
+                  <button (click)="sort('id')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
                   </div>
                 </th>
-                <% } %>
+                
+                <th scope="col" class="py-3 px-6">
+                  <div class="flex items-center">
+                  Name
+                  <button (click)="sort('name')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                  </div>
+                </th>
+                
+                <th scope="col" class="py-3 px-6">
+                  <div class="flex items-center">
+                  City
+                  <button (click)="sort('city')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                  </div>
+                </th>
+                
+                <th scope="col" class="py-3 px-6">
+                  <div class="flex items-center">
+                  Stars
+                  <button (click)="sort('stars')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                  </div>
+                </th>
+                
                 <th scope="col" class="text-center px-6 py-3">
                   Aksi
                 </th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of <%=camelize(name)%>List | orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: cp }" [class.active]="item === selected<%=classify(name)%>" 
+            <tr *ngFor="let item of cekList | orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: cp }" [class.active]="item === selectedCek" 
               class="bg-white border-b  hover:bg-gray-50 ">
-              <% for (let field of model.fields) { %>
-                <td class="px-6 py-4">{{item.<%=field.name%>
-                    <%=(field.control==='date' )? ' | date' : '' %>}}</td>
-                <% } %>
+              
+                <td class="px-6 py-4">{{item.id
+                    }}</td>
+                
+                <td class="px-6 py-4">{{item.name
+                    }}</td>
+                
+                <td class="px-6 py-4">{{item.city
+                    }}</td>
+                
+                <td class="px-6 py-4">{{item.stars
+                    }}</td>
+                
 
                 
                 <td class="py-4 gap-2 flex justify-center">
                     <!-- Edit Button -->
-                    <button [routerLink]="['../<%=pluralize(name)%>', item.<%=id.name%> ]" class="mx-1">
+                    <button [routerLink]="['../ceks', item.id ]" class="mx-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#005FAC] hover:text-[#004F8F]" fill="none"
                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                       <path

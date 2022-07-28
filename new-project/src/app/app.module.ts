@@ -8,7 +8,7 @@ import { AppComponent } from "./app.component";
 
 import { APP_EXTRA_OPTIONS, APP_ROUTES } from "./app.routes";
 import { HotelModule } from "./hotel/hotel.module";
-import { DummyModule } from "./dummy/dummy.module";
+import { CekModule } from './cek/cek.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -17,7 +17,7 @@ import { DummyModule } from "./dummy/dummy.module";
     HttpClientModule,
     RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),
     HotelModule,
-    DummyModule,
+    CekModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

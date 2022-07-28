@@ -1,4 +1,4 @@
-export class Dummy {
+export class Cek {
   id!: number;
   name!: string;
   city!: string;

@@ -12,6 +12,9 @@ export class <%= classify(name) %>ListComponent implements OnInit {
   filter = new <%= classify(name) %>Filter();
   selected<%=classify(name)%>!: <%= classify(name) %>;
   feedback: any = {};
+  cp: number = 1;
+  key: string = '';
+  reverse: boolean = false;
 
   get <%=camelize(name)%>List(): <%= classify(name) %>[] {
     return this.<%=camelize(name)%>Service.<%=camelize(name)%>List;
@@ -47,4 +50,11 @@ export class <%= classify(name) %>ListComponent implements OnInit {
       });
     }
   }
+
+  sort(key:string) {
+    this.key = key;
+    this.reverse = !this.reverse;
+
+  }
+  
 }
