@@ -1,11 +1,11 @@
-<div class="container mx-auto my-4">
+<div class="container mx-auto mt-6">
 
   <!-- Table Title -->
-  <h1 class="text-2xl font-bold my-4"><%=model.title%> List</h1>
+  <h1 class="text-2xl font-bold mt-6"><%=model.title%> List</h1>
 
 
   <!-- Form Search Input -->
-  <div class="my-4 flex justify-between">
+  <div class="flex justify-between my-6">
         <form #f="ngForm">
           <% for (let field of getFilterFields(model)) { %>
             <div class="relative mt-1">
@@ -17,7 +17,7 @@
                 </svg>
               </div>
               <input [(ngModel)]="filter.<%=field.name%>" id="<%=field.name%>" name="<%=field.name%>" (keydown.enter)="search()"
-              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-blue-500 focus:border-blue-500 block w-80 pl-10 p-2.5"
+              class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-full focus:outline-none focus:ring-[#005FAC] focus:border-[#005FAC] block w-80 pl-10 p-2.5"
                 placeholder="Search by <%=field.label%>">
             </div>
             <% } %>
