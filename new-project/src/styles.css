@@ -647,6 +647,11 @@ video {
   margin-bottom: 1.5rem;
 }
 
+.mx-4 {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
 .mb-8 {
   margin-bottom: 2rem;
 }
@@ -745,6 +750,14 @@ video {
   gap: 0.5rem;
 }
 
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
 .gap-y-6 {
   row-gap: 1.5rem;
 }
@@ -759,6 +772,10 @@ video {
 
 .rounded-full {
   border-radius: 9999px;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
 }
 
 .border {
@@ -808,8 +825,17 @@ video {
   background-color: rgb(0 0 0 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#DCEFFF\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(220 239 255 / var(--tw-bg-opacity));
+}
+
 .fill-\[\#005FAC\] {
   fill: #005FAC;
+}
+
+.fill-red-500 {
+  fill: #ef4444;
 }
 
 .p-5 {
@@ -822,6 +848,10 @@ video {
 
 .p-2 {
   padding: 0.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
 }
 
 .px-8 {
@@ -862,6 +892,11 @@ video {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
 }
 
 .pl-3 {
@@ -995,6 +1030,10 @@ video {
 
 .hover\:fill-\[\#004F8F\]:hover {
   fill: #004F8F;
+}
+
+.hover\:fill-red-800:hover {
+  fill: #991b1b;
 }
 
 .hover\:text-\[\#004F8F\]:hover {
