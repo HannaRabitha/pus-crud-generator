@@ -1,5 +1,11 @@
 # Npm Pack - PUSINTEK CRUD GENERATOR
 
+## Required dependencies
+
+- angular cli under 14.0.0
+- using node14
+- using typescript that competible with angular version (option)
+
 ## ⚙️ Installation
 
 ```bash
@@ -7,7 +13,8 @@ npm i --no-save pusintek-crud-1.0.0.tgz
 ```
 
 ## 🛠 Usage
-Switch to the folder src/app and create a sub-folder ```hotel``` with a file ```model.json```. Put the following content into this file:
+### Create folder & model file
+Switch to the folder src/app and create a sub-folder ```hotel``` (you can customize the sub-folder name) with a file ```model.json```. Put the following content into this file:
 ```javascript
 { 
     "title": "Hotel",
@@ -45,22 +52,28 @@ Switch to the folder src/app and create a sub-folder ```hotel``` with a file ```
     ]
 }
 ```
-
+### Generate component from npm pack
 In your project's root directory, run the following Angular CLI based command:
 ```ng g pusintek-crud:crud-module hotel```
 
+### Install some dependencies
 ```bash
 npm i ngx-pagination ng2-order-pipe
 ```
 
 Have a look to the generated files
 
+### Customize Paginate Number
+Open the html file ```hotel-list.component.html``` you can custome number of ```itemsPerPage: <number>```
 
-## required dependencies
+```paginate: { itemsPerPage: 3, currentPage: cp }```
 
-- angular cli under 14.0.0
-- using node14
-- using typescript  that competible with angular version (option)
+
+
+
+
+
+
 
 
 <br>
