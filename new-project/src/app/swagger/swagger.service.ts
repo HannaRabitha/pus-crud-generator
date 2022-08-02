@@ -10,8 +10,6 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 export class SwaggerService {
   swaggerList: Swagger[] = [];
 
-  quote: any;
-
   private baseUrl: string = 'https://service.kemenkeu.go.id/sample/quote/api/Sample/'; // URL to web api
 
   httpOptions = {
@@ -21,17 +19,11 @@ export class SwaggerService {
   constructor(private http: HttpClient) {
   }
 
-  getData() {   
-    const url = this.baseUrl;
-    return this.http.get<Swagger[]>(url + 'GetAllSamples');
-  }
-
-  loadData(): void {
-    this.getData().subscribe({
+  loadData(filter: SwaggerFilter): void {    
+    this.getData(filter).subscribe({
       next: (res: any) => {
         this.swaggerList = res.data;
-        console.log(this.swaggerList, "nameList");
-        console.log(res.statusCode, "STATUSNYAA!");
+        console.log(res.statusCode, "Status Code");
         console.log(res.message, "message");
       },
       error: err => {
@@ -39,6 +31,32 @@ export class SwaggerService {
       }
     });
   }
+
+  getData(filter: SwaggerFilter){   
+    const endpoint = 'GetAllSamples';
+
+    const params = {
+      'Filters': 'quote' + '@=' + filter.quote,
+      // 'Page': 1,
+      // 'PageSize': 6
+    };
+    
+    return this.http.get<Swagger[]>(this.baseUrl + endpoint, {params, headers});
+  }
+
+
+  findById(id: string): Observable<Swagger> {
+    const url = `${this.baseUrl}/GetSampleById/${id}`;
+    const params = { id: id };
+    return this.http.get<Swagger>(url, {params, headers});
+  }
+
+  // filter(endpoint: string): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}/GetAllSamples`)
+  // }
+
+
+
 
   // loadDataFilter(): void {
   //   this.loadData();

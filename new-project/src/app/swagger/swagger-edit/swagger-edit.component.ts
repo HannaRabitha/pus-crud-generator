@@ -22,25 +22,25 @@ export class SwaggerEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this
-    //   .route
-    //   .params
-    //   .pipe(
-    //     map(p => p['id']),
-    //     switchMap(id => {
-    //       if (id === 'new') { return of(new Swagger()); }
-    //       return this.swaggerService.findById(id);
-    //     })
-    //   )
-    //   .subscribe({
-    //     next: swagger => {
-    //       this.swagger = swagger;
-    //       this.feedback = {};
-    //     },
-    //     error: err => {
-    //       this.feedback = {type: 'warning', message: 'Error loading'};
-    //     }
-    //   });
+    this
+      .route
+      .params
+      .pipe(
+        map(p => p['id']),
+        switchMap(id => {
+          if (id === 'new') { return of(new Swagger()); }
+          return this.swaggerService.findById(id);
+        })
+      )
+      .subscribe({
+        next: swagger => {
+          this.swagger = swagger;
+          this.feedback = {};
+        },
+        error: err => {
+          this.feedback = {type: 'warning', message: 'Error loading'};
+        }
+      });
   }
 
   // save() {

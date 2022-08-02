@@ -15,9 +15,9 @@
                 clip-rule="evenodd"></path>
             </svg>
           </div>
-          <input [(ngModel)]="quote" id="city" name="city" (ngModelChange)="search()"
+          <input [(ngModel)]="filter.quote" id="swagger" name="swagger" (keydown.enter)="search()"
           class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-full focus:outline-none focus:ring-[#005FAC] focus:border-[#005FAC] block w-80 pl-10 p-2.5"
-            placeholder="Search by ??">
+            placeholder="Search by Quote">
         </div>
         
     </form>
@@ -65,6 +65,8 @@
                           <th scope="col" class="py-3 px-6">
                             <div class="flex items-center">
                                 Date
+                            <button (click)="sort('date')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+
                             </div>
                           </th>
 
@@ -73,6 +75,8 @@
                             <div class="flex items-center">
                                 <!-- Author Name -->
                                 Name
+                            <button (click)="sort('name')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+
                             </div>
                           </th>
 
@@ -80,6 +84,8 @@
                             <div class="flex items-center">
                                 <!-- Author Email -->
                                 Email 
+                            <button (click)="sort('email')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+
                             </div>
                           </th>
                           
@@ -89,8 +95,9 @@
                           </th>
                       </tr>
                     </thead>
+
                     <tbody>
-                      <tr *ngFor="let data of swaggerList" 
+                      <tr *ngFor="let data of swaggerList | paginate: { itemsPerPage: 5, currentPage: cp }" 
                         class="bg-white border-b  hover:bg-gray-50 ">
 
                         
@@ -139,14 +146,13 @@
                             </button>
                           </td>
                           
-            
                       </tr>
                     </tbody>
                   </table>
           
-                  <!-- <div class="w-full py-4 flex items-center justify-end">
+                  <div class="w-full py-4 flex items-center justify-end">
                     <pagination-controls (pageChange)="cp = $event"></pagination-controls>
-                  </div> -->
+                  </div>
               <!-- End List Data -->
           
               </div>
