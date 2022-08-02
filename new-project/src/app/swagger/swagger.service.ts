@@ -67,7 +67,6 @@ export class SwaggerService {
 
  
 
-
   // findById(id: string): Observable<Swagger> {
   //   const url = `${this.api}/${id}`;
   //   const params = { id: id };
@@ -93,18 +92,20 @@ export class SwaggerService {
   //   return this.http.get<Swagger[]>(this.api, {params, headers});
   // }
 
-  // save(entity: Swagger): Observable<Swagger> {
-  //   let params = new HttpParams();
-  //   let url = '';
-  //   if (entity.id) {
-  //     url = `${this.api}/${entity.id.toString()}`;
-  //     params = new HttpParams().set('ID', entity.id.toString());
-  //     return this.http.put<Swagger>(url, entity, {headers, params});
-  //   } else {
-  //     url = `${this.api}`;
-  //     return this.http.post<Swagger>(url, entity, {headers, params});
-  //   }
-  // }
+  save(entity: Swagger): Observable<Swagger> {
+    let params = new HttpParams();
+    const endpoint = 'CreateSample'
+    let url = '';
+
+    if (entity.id) {
+      url = `${this.baseUrl}+${endpoint}/${entity.id.toString()}`;
+      params = new HttpParams().set('ID', entity.id.toString());
+      return this.http.put<Swagger>(url, entity, {headers, params});
+    } else {
+      url = `${this.baseUrl}`;
+      return this.http.post<Swagger>(url, entity, {headers, params});
+    }
+  }
 
   // delete(entity: Swagger): Observable<Swagger> {
   //   let params = new HttpParams();

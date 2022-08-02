@@ -97,7 +97,7 @@
                     </thead>
 
                     <tbody>
-                      <tr *ngFor="let data of swaggerList | paginate: { itemsPerPage: 5, currentPage: cp }" 
+                      <tr *ngFor="let data of swaggerList | orderBy: key: reverse | paginate: { itemsPerPage: 5, currentPage: cp }" 
                         class="bg-white border-b  hover:bg-gray-50 ">
 
                         
