@@ -23,7 +23,7 @@ import { Ng2OrderModule } from 'ng2-order-pipe';
     <%= classify(name) %>EditComponent
   ],
   providers: [<%= classify(name) %>Service],
-  exports: [ 
+  exports: [
     <%= classify(name) %>ListComponent,
     <%= classify(name) %>EditComponent
   ]

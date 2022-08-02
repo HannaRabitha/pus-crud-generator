@@ -1,0 +1,159 @@
+<div class="container mx-auto p-6">
+
+    <!-- Table Title -->
+    <h1 class="text-2xl font-bold">Cek List</h1>
+
+     <!-- Form Search Input -->
+  <div class="flex justify-between my-6">
+    <form #f="ngForm">
+      
+        <div class="relative mt-1">
+          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+            <svg class="w-5 h-5 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <input [(ngModel)]="quote" id="city" name="city" (ngModelChange)="search()"
+          class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-full focus:outline-none focus:ring-[#005FAC] focus:border-[#005FAC] block w-80 pl-10 p-2.5"
+            placeholder="Search by ??">
+        </div>
+        
+    </form>
+     <!-- button add data -->
+   <button [routerLink]="['../swaggers', 'new' ]"
+    class="bg-[#005FAC] hover:bg-[#004F8F] focus:bg-[#005FAC] focus:outline-none focus:ring focus:ring-[#99BFDE] text-white font-bold py-1 px-6 rounded-full">
+    <div class="flex">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.0002 16.6667V9.99999M10.0002 9.99999V3.33333M10.0002 9.99999H16.6668M10.0002 9.99999H3.3335"
+          stroke="white" stroke-width="2" stroke-linecap="round" />
+      </svg>
+      <span class="md:flex hidden">
+      &nbsp; Tambah Data
+      </span>
+    </div>
+  </button>
+</div>
+  <!-- End Form Search Input -->
+
+
+    <div class="flex justify-between my-6">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+            <div *ngIf="swaggerList.length > 0">
+               
+                <!-- <div *ngIf="feedback.message" class="alert alert-{{feedback.type}}">{{ feedback.message }}</div> -->
+                
+                  <table class="w-full text-sm text-left text-gray-700" id="datatable">
+                    <thead class="text-lg text-gray-600 uppercase bg-[#F5F8FA]">
+                      <tr>
+                        
+                          <th scope="col" class="py-3 px-6">
+                            <div class="flex items-center">
+                            Id
+                            <button (click)="sort('id')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                            </div>
+                          </th>
+                          
+                          <th scope="col" class="py-3 px-6">
+                            <div class="flex items-center">
+                            Quote
+                            <button (click)="sort('quote')"><svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-3 h-3" aria-hidden="true" fill="currentColor" viewBox="0 0 320 512"><path d="M27.66 224h264.7c24.6 0 36.89-29.78 19.54-47.12l-132.3-136.8c-5.406-5.406-12.47-8.107-19.53-8.107c-7.055 0-14.09 2.701-19.45 8.107L8.119 176.9C-9.229 194.2 3.055 224 27.66 224zM292.3 288H27.66c-24.6 0-36.89 29.77-19.54 47.12l132.5 136.8C145.9 477.3 152.1 480 160 480c7.053 0 14.12-2.703 19.53-8.109l132.3-136.8C329.2 317.8 316.9 288 292.3 288z"/></svg></button>
+                            </div>
+                          </th>
+
+                          <th scope="col" class="py-3 px-6">
+                            <div class="flex items-center">
+                                Date
+                            </div>
+                          </th>
+
+
+                          <th scope="col" class="py-3 px-6">
+                            <div class="flex items-center">
+                                <!-- Author Name -->
+                                Name
+                            </div>
+                          </th>
+
+                          <th scope="col" class="py-3">
+                            <div class="flex items-center">
+                                <!-- Author Email -->
+                                Email 
+                            </div>
+                          </th>
+                          
+                          
+                          <th scope="col" class="text-center px-6 py-3">
+                            Aksi
+                          </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let data of swaggerList" 
+                        class="bg-white border-b  hover:bg-gray-50 ">
+
+                        
+                          <td class="px-6 py-4">
+                            {{data.id}}
+                          </td>
+
+                          <td class="px-6 py-4">
+                           {{data.quote}}
+                        </td>
+
+                        <td class="px-6 py-4">
+                            {{data.createdDate}}
+                         </td>
+
+                        <td class="px-6 py-4">
+                            {{data.author?.name}}
+                         </td>
+
+                         <td class="px-6 py-4">
+                            {{data.author?.email}}
+                         </td>
+
+
+
+                         <td class="py-4 gap-2 flex justify-center">
+                            <!-- Edit Button -->
+                            <button  class="mx-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#005FAC] hover:text-[#004F8F]" fill="none"
+                              viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                              <path
+                                d="M11 5H4.77778C4.30628 5 3.8541 5.1873 3.5207 5.5207C3.1873 5.8541 3 6.30628 3 6.77778V19.2222C3 19.6937 3.1873 20.1459 3.5207 20.4793C3.8541 20.8127 4.30628 21 4.77778 21H17.2222C17.6937 21 18.1459 20.8127 18.4793 20.4793C18.8127 20.1459 19 19.6937 19 19.2222V13" />
+                              <path
+                                d="M17.9227 3.52798C18.2607 3.18992 18.7193 3 19.1973 3C19.6754 3 20.134 3.18992 20.472 3.52798C20.8101 3.86605 21 4.32456 21 4.80265C21 5.28075 20.8101 5.73926 20.472 6.07732L12.3991 14.1502L9 15L9.84978 11.6009L17.9227 3.52798Z" />
+                            </svg>
+                            </button>
+        
+                            <!-- Delete Button -->
+                            <button class="mx-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-[#005FAC] hover:fill-[#004F8F]" fill="none"
+                          viewBox="0 0 24 24" stroke-width="0.2" stroke="currentColor">
+                          <path
+                            d="M5 20C5 20.5304 5.21071 21.0391 5.58579 21.4142C5.96086 21.7893 6.46957 22 7 22H17C17.5304 22 18.0391 21.7893 18.4142 21.4142C18.7893 21.0391 19 20.5304 19 20V8H21V6H17V4C17 3.46957 16.7893 2.96086 16.4142 2.58579C16.0391 2.21071 15.5304 2 15 2H9C8.46957 2 7.96086 2.21071 7.58579 2.58579C7.21071 2.96086 7 3.46957 7 4V6H3V8H5V20ZM9 4H15V6H9V4ZM8 8H17V20H7V8H8Z" />
+                          <path d="M9 10H11V18H9V10ZM13 10H15V18H13V10Z" />
+                        </svg>
+                            </button>
+                          </td>
+                          
+            
+                      </tr>
+                    </tbody>
+                  </table>
+          
+                  <!-- <div class="w-full py-4 flex items-center justify-end">
+                    <pagination-controls (pageChange)="cp = $event"></pagination-controls>
+                  </div> -->
+              <!-- End List Data -->
+          
+              </div>
+        </div>
+        
+    </div>
+  
+  
+   
+  </div>

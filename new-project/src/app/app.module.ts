@@ -9,6 +9,7 @@ import { AppComponent } from "./app.component";
 import { APP_EXTRA_OPTIONS, APP_ROUTES } from "./app.routes";
 import { HotelModule } from "./hotel/hotel.module";
 import { CekModule } from './cek/cek.module';
+import { SwaggerModule } from './swagger/swagger.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { CekModule } from './cek/cek.module';
     RouterModule.forRoot([...APP_ROUTES], { ...APP_EXTRA_OPTIONS }),
     HotelModule,
     CekModule,
+    SwaggerModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
