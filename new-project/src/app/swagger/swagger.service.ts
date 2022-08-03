@@ -3,6 +3,7 @@ import { SwaggerFilter } from './swagger-filter';
 import { Injectable } from '@angular/core';
 import { EMPTY, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Data } from '@angular/router';
 
 const headers = new HttpHeaders().set('Accept', 'application/json');
 
@@ -11,10 +12,6 @@ export class SwaggerService {
   swaggerList: Swagger[] = [];
 
   private baseUrl: string = 'https://service.kemenkeu.go.id/sample/quote/api/Sample/'; // URL to web api
-
-  httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-  };
 
   constructor(private http: HttpClient) {
   }
@@ -45,77 +42,42 @@ export class SwaggerService {
   }
 
 
-  findById(id: string): Observable<Swagger> {
-    const url = `${this.baseUrl}/GetSampleById/${id}`;
+  getById(id: string): Observable<Swagger> {
+    const url = `${this.baseUrl}GetSampleById/${id}`;
     const params = { id: id };
     return this.http.get<Swagger>(url, {params, headers});
   }
 
-  // filter(endpoint: string): Observable<any> {
-  //   return this.http.get<any>(`${this.baseUrl}/GetAllSamples`)
-  // }
-
-
-
-
-  // loadDataFilter(): void {
-  //   this.loadData();
-  //     this.swaggerList = this.swaggerList.filter(res => {
-  //       return res.quote.toLocaleLowerCase().match(this.quote.toLocaleLowerCase());
-  //     })
-  // }
-
- 
-
-  // findById(id: string): Observable<Swagger> {
-  //   const url = `${this.api}/${id}`;
-  //   const params = { id: id };
-  //   return this.http.get<Swagger>(url, {params, headers});
-  // }
-
-  // load(filter: SwaggerFilter): void {
-  //   this.find(filter).subscribe({
-  //     next: result => {
-  //       this.swaggerList = result;
-  //     },
-  //     error: err => {
-  //       console.error('error loading', err);
-  //     }
-  //   });
-  // }
-
-  // find(filter: SwaggerFilter): Observable<Swagger[]> {
-  //   const params = {
-  //     'city': filter.city,
-  //   };
-
-  //   return this.http.get<Swagger[]>(this.api, {params, headers});
-  // }
-
-  save(entity: Swagger): Observable<Swagger> {
+  addData(entity: Swagger): Observable<Swagger> {
     let params = new HttpParams();
-    const endpoint = 'CreateSample'
+    let url = '';
+    let endpoint = '';
+
+    if (entity.id) { //Updated By ID
+      endpoint = 'UpdateSample'
+      url = `${this.baseUrl}/${endpoint}/${entity.id.toString()}`;
+      params = new HttpParams().set('ID', entity.id.toString());
+      return this.http.put<Swagger>(url, entity, {headers, params});
+      
+    } else { //Create Data
+       endpoint = 'CreateSample';
+      url = `${this.baseUrl}/${endpoint}`;
+      return this.http.post<Swagger>(url, entity, {headers, params});
+    }
+    
+  }
+
+  deleteData(entity: Swagger): Observable<Swagger> {
+    let params = new HttpParams();
+    const endpoint = 'DeleteSample';
     let url = '';
 
     if (entity.id) {
-      url = `${this.baseUrl}+${endpoint}/${entity.id.toString()}`;
+      url = `${this.baseUrl}/${endpoint}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
-      return this.http.put<Swagger>(url, entity, {headers, params});
-    } else {
-      url = `${this.baseUrl}`;
-      return this.http.post<Swagger>(url, entity, {headers, params});
+      return this.http.delete<Swagger>(url, {headers, params});
     }
+    return EMPTY;
   }
-
-  // delete(entity: Swagger): Observable<Swagger> {
-  //   let params = new HttpParams();
-  //   let url = '';
-  //   if (entity.id) {
-  //     url = `${this.api}/${entity.id.toString()}`;
-  //     params = new HttpParams().set('ID', entity.id.toString());
-  //     return this.http.delete<Swagger>(url, {headers, params});
-  //   }
-  //   return EMPTY;
-  // }
 }
 

@@ -125,7 +125,7 @@
 
                          <td class="py-4 gap-2 flex justify-center">
                             <!-- Edit Button -->
-                            <button  class="mx-1">
+                            <button [routerLink]="['../swaggers', data.id ]"  class="mx-1">
                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#005FAC] hover:text-[#004F8F]" fill="none"
                               viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
                               <path
@@ -136,7 +136,7 @@
                             </button>
         
                             <!-- Delete Button -->
-                            <button class="mx-1">
+                            <button (click)="delete(data)" class="mx-1">
                               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 fill-[#005FAC] hover:fill-[#004F8F]" fill="none"
                           viewBox="0 0 24 24" stroke-width="0.2" stroke="currentColor">
                           <path

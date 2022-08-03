@@ -14,6 +14,8 @@ export class SwaggerEditComponent implements OnInit {
   id!: string;
   swagger!: Swagger;
   feedback: any = {};
+  
+  isNew: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,13 +30,20 @@ export class SwaggerEditComponent implements OnInit {
       .pipe(
         map(p => p['id']),
         switchMap(id => {
-          if (id === 'new') { return of(new Swagger()); }
-          return this.swaggerService.findById(id);
+          if (id === 'new') { 
+            this.isNew = true;
+            return of(new Swagger()); 
+          }
+          return this.swaggerService.getById(id);
         })
       )
       .subscribe({
-        next: swagger => {
+        next: (swagger:any) => {
+          if (this.isNew === true) {
           this.swagger = swagger;
+          } else {
+            this.swagger = swagger.data;
+          }
           this.feedback = {};
         },
         error: err => {
@@ -43,22 +52,22 @@ export class SwaggerEditComponent implements OnInit {
       });
   }
 
-  // save() {
-  //   this.swaggerService.save(this.swagger).subscribe({
-  //     next: swagger => {
-  //       this.swagger = swagger;
-  //       this.feedback = {type: 'success', message: 'Save was successful!'};
-  //       setTimeout(async () => {
-  //         await this.router.navigate(['/swaggers']);
-  //       }, 1000);
-  //     },
-  //     error: err => {
-  //       this.feedback = {type: 'warning', message: 'Error saving'};
-  //     }
-  //   });
-  // }
+  save() {
+    this.swaggerService.addData(this.swagger).subscribe({
+      next: swagger => {
+        this.swagger = swagger;
+        this.feedback = {type: 'success', message: 'Save was successful!'};
+        setTimeout(async () => {
+          await this.router.navigate(['/swaggers']);
+        }, 1000);
+      },
+      error: err => {
+        this.feedback = {type: 'warning', message: 'Error saving'};
+      }
+    });
+  }
 
-  // async cancel() {
-  //   await this.router.navigate(['/swaggers']);
-  // }
+  async cancel() {
+    await this.router.navigate(['/swaggers']);
+  }
 }

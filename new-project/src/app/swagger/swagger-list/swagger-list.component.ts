@@ -14,7 +14,7 @@ export class SwaggerListComponent implements OnInit {
   selectedSwagger!: Swagger; //from model.ts
   selectedRootObject!: RootObject; //from model.ts
 
-  // feedback: any = {};
+  feedback: any = {};
 
 
   cp: number = 1;
@@ -44,17 +44,17 @@ export class SwaggerListComponent implements OnInit {
 
   delete(swagger: Swagger): void {
     if (confirm('Are you sure?')) {
-      // this.swaggerService.delete(swagger).subscribe({
-      //   next: () => {
-      //     this.feedback = {type: 'success', message: 'Delete was successful!'};
-      //     setTimeout(() => {
-      //       this.search();
-      //     }, 1000);
-      //   },
-      //   error: err => {
-      //     this.feedback = {type: 'warning', message: 'Error deleting.'};
-      //   }
-      // });
+      this.swaggerService.deleteData(swagger).subscribe({
+        next: () => {
+          this.feedback = {type: 'success', message: 'Delete was successful!'};
+          setTimeout(() => {
+            this.search();
+          }, 1000);
+        },
+        error: err => {
+          this.feedback = {type: 'warning', message: 'Error deleting.'};
+        }
+      });
     }
   }
 

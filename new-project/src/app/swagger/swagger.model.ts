@@ -8,7 +8,6 @@ export class Swagger {
   quote!: string;
   createdDate!: Date;
   author!: Author;
- 
 }
 
 export class Author {
