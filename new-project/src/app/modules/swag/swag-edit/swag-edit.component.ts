@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { <%= classify(name) %>Service } from '../<%=dasherize(name)%>.service';
-import { <%= classify(name) %> } from '../<%=dasherize(name)%>.model';
+import { SwagService } from '../swag.service';
+import { Swag } from '../swag.model';
 import { map, switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-<%=dasherize(name)%>-edit',
-  templateUrl: './<%=dasherize(name)%>-edit.component.html'
+  selector: 'app-swag-edit',
+  templateUrl: './swag-edit.component.html'
 })
-export class <%=classify(name)%>EditComponent implements OnInit {
+export class SwagEditComponent implements OnInit {
 
   id!: string;
-  <%=camelize(name)%>!: <%=classify(name)%>;
+  swag!: Swag;
   feedback: any = {};
 
   isNew:boolean = false;
@@ -20,7 +20,7 @@ export class <%=classify(name)%>EditComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private <%=camelize(name)%>Service: <%=classify(name)%>Service) {
+    private swagService: SwagService) {
   }
 
   ngOnInit() {
@@ -32,18 +32,18 @@ export class <%=classify(name)%>EditComponent implements OnInit {
         switchMap(id => {
           if (id === 'new') { 
             this.isNew = true;
-            return of(new <%=classify(name)%>()); 
+            return of(new Swag()); 
           }
-          return this.<%=camelize(name)%>Service.getById(id);
+          return this.swagService.getById(id);
         })
       )
       .subscribe({
-        next: (<%=camelize(name)%>:any) => {
+        next: (swag:any) => {
 
           if (this.isNew === true) {
-            this.<%=camelize(name)%> = <%=camelize(name)%>;
+            this.swag = swag;
           } else {
-            this.<%=camelize(name)%> = <%=camelize(name)%>.data;
+            this.swag = swag.data;
           }
           this.feedback = {};
         },
@@ -54,12 +54,12 @@ export class <%=classify(name)%>EditComponent implements OnInit {
   }
 
   save() {
-    this.<%=camelize(name)%>Service.addData(this.<%=camelize(name)%>).subscribe({
-      next: <%=camelize(name)%> => {
-        this.<%=camelize(name)%> = <%=camelize(name)%>;
+    this.swagService.addData(this.swag).subscribe({
+      next: swag => {
+        this.swag = swag;
         this.feedback = {type: 'success', message: 'Save was successful!'};
         setTimeout(async () => {
-          await this.router.navigate(['/<%=pluralize(name)%>']);
+          await this.router.navigate(['/swags']);
         }, 1000);
       },
       error: err => {
@@ -69,6 +69,6 @@ export class <%=classify(name)%>EditComponent implements OnInit {
   }
 
   async cancel() {
-    await this.router.navigate(['/<%=pluralize(name)%>']);
+    await this.router.navigate(['/swags']);
   }
 }

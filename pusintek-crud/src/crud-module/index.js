@@ -17,42 +17,17 @@ const crudModelUtils = require("../utils/crud-model-utils");
 const strings_1 = require("@angular-devkit/core/src/utils/strings");
 const workspace_1 = require("@schematics/angular/utility/workspace");
 const schematics_2 = require("@angular/cdk/schematics");
-// export const BOOTSTRAP = 'bootstrap';
-// export const MATERIAL = 'material';
-// export const PAPER_DASHBOARD = 'paper-dashboard';
-// function getFramework(host: Tree): string {
-//   let possibleFiles = ['/package.json'];
-//   const path = possibleFiles.filter(path => host.exists(path))[0];
-//   const configBuffer = host.read(path);
-//   if (configBuffer === null) {
-//     throw new SchematicsException(`Could not find (${path})`);
-//   } else {
-//     const content = JSON.parse(configBuffer.toString());
-//     if (content.dependencies['bootstrap']) {
-//       return BOOTSTRAP;
-//     } else if (content.dependencies['@angular/material']) {
-//       return MATERIAL;
-//     } else {
-//       return PAPER_DASHBOARD;
-//     }
-//   }
-// }
 function generate(options) {
     return (host) => __awaiter(this, void 0, void 0, function* () {
-        // allow passing the CSS framework in (for testing)
         let cssFramework = options.style;
-        // if no CSS framework defined, try to detect it
-        // defaults to paper-dashboard if nothing found (for backward compatibility)
-        // if (!cssFramework) {
-        //   cssFramework = getFramework(host);
-        // }
         const workspace = yield (0, workspace_1.getWorkspace)(host);
         if (!options.project) {
             options.project = workspace.projects.keys().next().value;
         }
         const project = workspace.projects.get(options.project);
         const appPath = `${project === null || project === void 0 ? void 0 : project.sourceRoot}/app`;
-        const modelFile = `${appPath}/${options.name}/${options.model}`;
+        const appPath2 = `${project === null || project === void 0 ? void 0 : project.sourceRoot}/app/modules`;
+        const modelFile = `${appPath2}/${options.name}/${options.model}`;
         const modelBuffer = host.read(modelFile);
         if (modelBuffer === null) {
             throw new schematics_1.SchematicsException(`Model file ${options.model} does not exist.`);
@@ -60,10 +35,10 @@ function generate(options) {
         const modelJson = modelBuffer.toString("utf-8");
         const model = JSON5.parse(modelJson);
         // add imports to app.module.ts
-        (0, schematics_2.addModuleImportToModule)(host, `${appPath}/app.module.ts`, `${(0, strings_1.capitalize)(model.entity)}Module`, `./${options.name}/${model.entity}.module`);
+        (0, schematics_2.addModuleImportToModule)(host, `${appPath}/app.module.ts`, `${(0, strings_1.capitalize)(model.entity)}Module`, `./modules/${options.name}/${model.entity}.module`);
         const templateSource = (0, schematics_1.apply)((0, schematics_1.url)(`./files/${cssFramework}`), [
             (0, schematics_1.template)(Object.assign(Object.assign(Object.assign(Object.assign({}, core_1.strings), options), crudModelUtils), { model })),
-            (0, schematics_1.move)(`${appPath}/${options.name}`),
+            (0, schematics_1.move)(`${appPath2}/${options.name}`),
         ]);
         return (0, schematics_1.mergeWith)(templateSource, schematics_1.MergeStrategy.Overwrite);
     });

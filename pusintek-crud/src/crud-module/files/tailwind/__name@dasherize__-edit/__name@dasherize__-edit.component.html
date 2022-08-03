@@ -15,7 +15,7 @@
             <div class="my-4">
               <label class="block mb-2 text-sm font-bold text-gray-700" <%if (!field.readonly) {%> for="<%=field.name%>"
                   <%}%>><%=field.label%></label>
-              <%if (field.readonly) {%>{{<%=camelize(name)%>.<%=field.name%> || 'n/a'}} <%}%>
+              <%if (field.readonly) {%>{{<%=camelize(name)%>.<%=field.name%> || 'default'}} <%}%>
                       <%if (!field.readonly && field.type==='date' ){ %>
                         <!-- input data -->
                         <input type="date"

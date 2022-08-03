@@ -20,39 +20,9 @@ import { capitalize } from "@angular-devkit/core/src/utils/strings";
 import { getWorkspace } from "@schematics/angular/utility/workspace";
 import { addModuleImportToModule } from "@angular/cdk/schematics";
 
-// export const BOOTSTRAP = 'bootstrap';
-// export const MATERIAL = 'material';
-// export const PAPER_DASHBOARD = 'paper-dashboard';
-
-// function getFramework(host: Tree): string {
-//   let possibleFiles = ['/package.json'];
-//   const path = possibleFiles.filter(path => host.exists(path))[0];
-
-//   const configBuffer = host.read(path);
-//   if (configBuffer === null) {
-//     throw new SchematicsException(`Could not find (${path})`);
-//   } else {
-//     const content = JSON.parse(configBuffer.toString());
-//     if (content.dependencies['bootstrap']) {
-//       return BOOTSTRAP;
-//     } else if (content.dependencies['@angular/material']) {
-//       return MATERIAL;
-//     } else {
-//       return PAPER_DASHBOARD;
-//     }
-//   }
-// }
-
 export function generate(options: CrudOptions): Rule {
   return async (host: Tree) => {
-    // allow passing the CSS framework in (for testing)
     let cssFramework = options.style;
-
-    // if no CSS framework defined, try to detect it
-    // defaults to paper-dashboard if nothing found (for backward compatibility)
-    // if (!cssFramework) {
-    //   cssFramework = getFramework(host);
-    // }
 
     const workspace = await getWorkspace(host);
     if (!options.project) {
@@ -60,8 +30,9 @@ export function generate(options: CrudOptions): Rule {
     }
     const project = workspace.projects.get(options.project);
     const appPath = `${project?.sourceRoot}/app`;
+    const appPath2 = `${project?.sourceRoot}/app/modules`;
 
-    const modelFile = `${appPath}/${options.name}/${options.model}`;
+    const modelFile = `${appPath2}/${options.name}/${options.model}`;
     const modelBuffer = host.read(modelFile);
 
     if (modelBuffer === null) {
@@ -78,7 +49,7 @@ export function generate(options: CrudOptions): Rule {
       host,
       `${appPath}/app.module.ts`,
       `${capitalize(model.entity)}Module`,
-      `./${options.name}/${model.entity}.module`
+      `./modules/${options.name}/${model.entity}.module`
     );
 
     const templateSource = apply(url(`./files/${cssFramework}`), [
@@ -88,7 +59,7 @@ export function generate(options: CrudOptions): Rule {
         ...(crudModelUtils as any),
         model,
       }),
-      move(`${appPath}/${options.name}`),
+      move(`${appPath2}/${options.name}`),
     ]);
 
     return mergeWith(templateSource, MergeStrategy.Overwrite);

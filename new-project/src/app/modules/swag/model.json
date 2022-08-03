@@ -2,12 +2,12 @@
   "title": "Swag",
   "entity": "swag",
   "api": {
-    "url": "https://service.kemenkeu.go.id/sample",
-    "create": "CreateSample",
-    "read": "GetAllSamples",
-    "readById": "GetSampleById",
-    "update": "UpdateSample",
-    "delete": "DeleteSample"
+    "url": "https://service.kemenkeu.go.id/sample/quote/api/Sample",
+    "create": "/CreateSample",
+    "read": "/GetAllSamples",
+    "readById": "/GetSampleById",
+    "update": "/UpdateSample",
+    "delete": "/DeleteSample"
   },
   "filter": ["quote"],
   "fields": [

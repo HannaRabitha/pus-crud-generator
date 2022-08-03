@@ -10,6 +10,7 @@ import { APP_EXTRA_OPTIONS, APP_ROUTES } from "./app.routes";
 import { HotelModule } from "./hotel/hotel.module";
 import { CekModule } from './cek/cek.module';
 import { SwaggerModule } from './swagger/swagger.module';
+import { SwagModule } from './modules/swag/swag.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { SwaggerModule } from './swagger/swagger.module';
     HotelModule,
     CekModule,
     SwaggerModule,
+    SwagModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

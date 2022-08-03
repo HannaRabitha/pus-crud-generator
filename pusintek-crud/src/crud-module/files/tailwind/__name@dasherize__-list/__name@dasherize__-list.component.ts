@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { <%= classify(name) %>Filter } from '../<%=dasherize(name)%>-filter';
 import { <%= classify(name) %>Service } from '../<%=dasherize(name)%>.service';
-import { <%= classify(name) %> } from '../<%=dasherize(name)%>';
+import { <%= classify(name) %> } from '../<%=dasherize(name)%>.model';
 
 @Component({
   selector: 'app-<%=dasherize(name)%>',
@@ -28,7 +28,7 @@ export class <%= classify(name) %>ListComponent implements OnInit {
   }
 
   search(): void {
-    this.<%=camelize(name)%>Service.load(this.filter);
+    this.<%=camelize(name)%>Service.loadData(this.filter);
   }
 
   select(selected: <%= classify(name) %>): void {
@@ -37,7 +37,7 @@ export class <%= classify(name) %>ListComponent implements OnInit {
 
   delete(<%=camelize(name)%>: <%= classify(name) %>): void {
     if (confirm('Are you sure?')) {
-      this.<%=camelize(name)%>Service.delete(<%=camelize(name)%>).subscribe({
+      this.<%=camelize(name)%>Service.deleteData(<%=camelize(name)%>).subscribe({
         next: () => {
           this.feedback = {type: 'success', message: 'Delete was successful!'};
           setTimeout(() => {

@@ -11,7 +11,13 @@ const headers = new HttpHeaders().set('Accept', 'application/json');
 export class SwaggerService {
   swaggerList: Swagger[] = [];
 
-  private baseUrl: string = 'https://service.kemenkeu.go.id/sample/quote/api/Sample/'; // URL to web api
+  private api: string = 'https://service.kemenkeu.go.id/sample/quote/api/Sample/'; // URL to web api
+  private endpointCreate: string = 'CreateSample';
+  private endpointRead: string = 'GetAllSamples';
+  private endpointReadById: string = 'GetSampleById';
+  private endpointUpdate: string = 'UpdateSample';
+  private endpointDelete: string = 'DeleteSample';
+
 
   constructor(private http: HttpClient) {
   }
@@ -30,20 +36,18 @@ export class SwaggerService {
   }
 
   getData(filter: SwaggerFilter){   
-    const endpoint = 'GetAllSamples';
-
     const params = {
       'Filters': 'quote' + '@=' + filter.quote,
       // 'Page': 1,
       // 'PageSize': 6
     };
     
-    return this.http.get<Swagger[]>(this.baseUrl + endpoint, {params, headers});
+    return this.http.get<Swagger[]>(this.api + this.endpointRead, {params, headers});
   }
 
 
   getById(id: string): Observable<Swagger> {
-    const url = `${this.baseUrl}GetSampleById/${id}`;
+    const url = `${this.api}${this.endpointReadById}/${id}`;
     const params = { id: id };
     return this.http.get<Swagger>(url, {params, headers});
   }
@@ -51,17 +55,14 @@ export class SwaggerService {
   addData(entity: Swagger): Observable<Swagger> {
     let params = new HttpParams();
     let url = '';
-    let endpoint = '';
 
     if (entity.id) { //Updated By ID
-      endpoint = 'UpdateSample'
-      url = `${this.baseUrl}/${endpoint}/${entity.id.toString()}`;
+      
+      url = `${this.api}/${this.endpointUpdate}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
       return this.http.put<Swagger>(url, entity, {headers, params});
-      
     } else { //Create Data
-       endpoint = 'CreateSample';
-      url = `${this.baseUrl}/${endpoint}`;
+      url = `${this.api}/${this.endpointCreate}`;
       return this.http.post<Swagger>(url, entity, {headers, params});
     }
     
@@ -69,11 +70,10 @@ export class SwaggerService {
 
   deleteData(entity: Swagger): Observable<Swagger> {
     let params = new HttpParams();
-    const endpoint = 'DeleteSample';
     let url = '';
 
     if (entity.id) {
-      url = `${this.baseUrl}/${endpoint}/${entity.id.toString()}`;
+      url = `${this.api}/${this.endpointDelete}/${entity.id.toString()}`;
       params = new HttpParams().set('ID', entity.id.toString());
       return this.http.delete<Swagger>(url, {headers, params});
     }
